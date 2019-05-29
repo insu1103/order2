@@ -1,0 +1,21 @@
+<%= form_with(model: [@category, @category.stores.build], local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :s_name %>
+    <%= form.text_field :s_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :s_num %>
+    <%= form.number_field :s_num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :s_add %>
+    <%= form.text_field :s_add %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

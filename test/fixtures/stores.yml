@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  s_name: MyString
+  s_num: 1
+  s_add: MyString
+  category: one
+
+two:
+  s_name: MyString
+  s_num: 1
+  s_add: MyString
+  category: two

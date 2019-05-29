@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>F category:</strong>
+  <%= @category.f_category %>
+</p>
+
+<table>
+	<% @category.stores.each do |store| %>
+	  <tr>
+	  	<td><%= store.s_name %></td>
+	  	<td> | <%= link_to 'Show', category_store_path(@category,store) %></td>
+	  	<td> | <%= link_to 'Menu', category_store_menus_path(@category,store) %></td>
+	  </tr>
+	<% end %>
+</table>
+
+<%= render 'stores/form' %>
+<%= link_to 'Back', categories_path(@category) %>
