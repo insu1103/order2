@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <strong>F category:</strong>
@@ -10,7 +10,7 @@
 	  <tr>
 	  	<td><%= store.s_name %></td>
 	  	<td> | <%= link_to 'Show', category_store_path(@category,store) %></td>
-	  	<td> | <%= link_to 'Menu', category_store_menus_path(@category,store) %></td>
+	  	<td> | <%= link_to 'Menu', store_menus_path(store) %></td>
 	  </tr>
 	<% end %>
 </table>

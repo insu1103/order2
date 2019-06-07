@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Menus</h1>
 
@@ -7,6 +7,7 @@
     <tr>
       <th>F name</th>
       <th>Price</th>
+      <th>function</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,11 +17,41 @@
       <tr>
         <td><%= menu.f_name %></td>
         <td><%= menu.price %></td>
+        <td><%=link_to 'Add_food', create_bucket_path(menu.store_id, menu), method: :post ,:remote => true %></td>
+        
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<table>
+  <tr>
+  <th>F name</th> 
+  <th>Price</th>
+  <th colspan="2">Acount</th>
+  <th>Cost</th>
+  </tr>
+  <% @bucket.each do |b| %>
+  <tr>
+    <td><%= Menu.find(b.menu_id).f_name %></td>
+    <td><%= Menu.find(b.menu_id).price %></td>
+    <td><%= b.acount %></td>
+    <td>
+    <%= button_to "+", change_acount1_path(b), method: :get, :remote => true %>
+    <%= button_to "-", change_acount2_path(b), method: :get, :remote => true %>
+    </td>
+    
+    <td><%= b.acount*Menu.find(b.menu_id).price %></td>
+    <td><%= link_to 'Destroy', b, method: :delete, :remote => true %></td>
+    <% @Total_cost += b.acount*Menu.find(b.menu_id).price %>
+    
+  </tr>
+  <% end %>
+</table>
+총 결제 금액은 <%= @Total_cost %>원 입니다
+
 <br>
 
-<%= link_to 'New Menu', new_category_store_menu_path %>
+
+<%= link_to 'New Menu', new_store_menu_path(@store)%>
+<%= link_to 'Back', category_path(@category) %>

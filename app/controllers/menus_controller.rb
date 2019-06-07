@@ -4,8 +4,13 @@ class MenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
-    @menus = Menu.all
+    @category = Store.find(params[:store_id]).category_id
+    @store = Store.find(params[:store_id])
     @menu_new = Menu.new
+    @menus = Menu.where(store_id: params[:store_id]).all
+    @bucket = Bucket.where(store_id: params[:store_id]).all
+    #@menu_new = Menu.new
+    @Total_cost = 0
   end
 
   # GET /menus/1
@@ -15,8 +20,8 @@ class MenusController < ApplicationController
 
   # GET /menus/new
   def new
-    @category = Category.find(params[:category_id])
-    @store = @category.stores.find(params[:store_id])
+    @category = Store.find(params[:store_id]).category_id
+    @store = Store.find(params[:store_id])
     @menu = @store.menus.new
   end
 
@@ -30,10 +35,10 @@ class MenusController < ApplicationController
   # POST /menus
   # POST /menus.json
   def create
-    @category = Category.find(params[:category_id])
-    @store = @category.stores.find(params[:store_id])
+    @category = Store.find(params[:store_id]).category_id
+    @store = Store.find(params[:store_id])
     @menu = @store.menus.create(menu_params)
-    redirect_to category_store_menus(@category,@store)
+    redirect_to store_menus_path(@category,@store)
   end
   
   # PATCH/PUT /menus/1
@@ -42,7 +47,7 @@ class MenusController < ApplicationController
     @category = Category.find(params[:category_id])
     @store = @category.stores.find(params[:store_id])
     @menu = @store.menus.find(params[:id])
-    redirect_to category_stores_path(@store)
+    redirect_to category_store_menus_path(@category,@store)
   end
 
   # DELETE /menus/1
@@ -51,7 +56,7 @@ class MenusController < ApplicationController
     @category = Category.find(params[:category_id])
     @store = @category.stores.find(params[:store_id])
     @menu.destroy
-    redirect_to category_stores_path(@store)
+    redirect_to category_store_menus_path(@category,@store)
   end
 
   private
